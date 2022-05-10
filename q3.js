@@ -1,32 +1,55 @@
 async function enviar() {
-    alert("sss")
+    alert("Calculando...")
     await delta()
-    alert("aaa")
+    alert("Resultados prontos!")
 }
 
 function delta() {
-    const a = document.querySelector('#A')
-    const b = document.querySelector('#B')
-    const c = document.querySelector('#C')
-    const D = Math.pow(parseInt(b.value), 2) - 4 * parseInt(a.value) * parseInt(c.value)
-    alert(parseInt(a.value)+ parseInt(b.value)+ parseInt(c.value))
+ 
 
     return new Promise((resolve)=>{
+        const A = document.querySelector('#A');
+        const B = document.querySelector('#B');
+        const C = document.querySelector('#C');
+        try{
         setTimeout(() =>{
-            let x1 = document.querySelector('x1')
-            x1.innerHTML = parseInt(-b.value) + Math.sqrt(D) / 2 * parseInt(a.value)
-            let x2 = document.querySelector('x1')
-            x2.innerHTML = parseInt(-b.value) - Math.sqrt(D) / 2 * parseInt(a.value)
-            resolve()
+            const a = A.value;
+            const b = B.value;
+            const c = C.value;
+            const D = Math.pow(parseInt(b), 2) - 4 * parseInt(a) * parseInt(c);
+            if(D < 0){
+                alert("Não existem raízes reais!!")
+            }else if(D = 0){
+                alert("Os resultados são iguais!")
+                const r = parseInt(a) * 2;
+                const r1 = (parseInt(-b) + Math.sqrt(D)) / r
+                const r2 = (parseInt(-b) - Math.sqrt(D)) / r
+                let x1 = document.querySelector('x1')
+                let x2 = document.querySelector('x2')
+                x1.innerHTML= r1
+                x2.innerHTML= r2
+            }else if(D > 0) {
+                alert("São dois resultados diferentes!")
+                const r = parseInt(a) * 2;
+                const r1 = (parseInt(-b) + Math.sqrt(D)) / r
+                const r2 = (parseInt(-b) - Math.sqrt(D)) / r
+                let x1 = document.querySelector('x1')
+                let x2 = document.querySelector('x2')
+                x1.innerHTML= r1
+                x2.innerHTML= r2
+
+            }
         }, 2000)
+    }catch(err){
+        alert("Erro Fatal :(" + err)
+    }
     })
-}
+};
 
 
-const form = document.querySelector('#numbers')
+const form = document.querySelector('#numbers');
 form.addEventListener('submit', el => {
     el.preventDefault();
-    enviar()
-})
-
+    enviar();
+});
 
